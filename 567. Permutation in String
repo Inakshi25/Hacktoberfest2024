@@ -1,0 +1,18 @@
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        int[] ct=new int[26];
+        int req=s1.length();
+        for(final char c:s1.toCharArray())
+            ++ct[c-'a'];
+        for(int r=0;r<s2.length();r++){
+            if(--ct[s2.charAt(r)-'a']>=0)
+                --req;
+            if(r>=s1.length())
+                if(++ct[s2.charAt(r-s1.length())-'a']>0)
+                    ++req;
+            if(req==0)
+                return true;
+        }
+        return false;
+    }
+}
